@@ -1,4 +1,4 @@
-# Personal project list
+## Personal project list
 
 - [resume](/resume)
 - [Taobao](/Taobao)
