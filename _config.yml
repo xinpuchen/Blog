@@ -80,6 +80,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  branch: deploy
   repo: https://github.com/xinpuchen/xinpuchen.github.io.git
   message: 'deploy'
