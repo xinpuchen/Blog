@@ -1,14 +1,12 @@
 en:
   name: English
   disqus: en
-  subtitle: Theme for Hexo
-  author: Theme NexT
-  description: Stay Simple. Stay NexT.
+  subtitle: Welcome to my blog!
+  keywords: Web Front End
 ru:
   name: Русский
   disqus: ru
   subtitle: Тема для Hexo
-  author: Тема NexT
   description: Ставь просто. Ставь NexT.
   menu:
     News: Новости
@@ -20,5 +18,8 @@ ru:
     Tag Plugins: Плагины тэгов
     Advanced Settings: Расширенные настройки
     FAQ's: ЧаВо
-zh-TW:
+zh-CN:
   name: Chienese
+  disqus: zh-CN
+  subtitle: 欢迎来到我的博客！
+  keywords: Web 前端

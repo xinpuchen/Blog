@@ -2,11 +2,11 @@
 ###################### Hexo Configuration #######################
 #################################################################
 
-title: xinpuchen
-
-keywords: "xinpuchen"
-
+title: Xinpu's Blog
+description: "HTML CSS JavaScript NodeJS Python PHP"
+author: xinpu
 language: en
+timezone: UTC
 
 index_generator:
   per_page: 4
@@ -25,8 +25,6 @@ tag_generator:
    per_page: 5
    enable_index_page: false
 
-timezone: UTC
-
 url: https://xinpuchen.github.io
 root: /
 permalink: :title/
@@ -41,8 +39,6 @@ code_dir: downloads/code
 i18n_dir: :lang
 
 skip_render:
-- 'CNAME'
-- 'robots.txt'
 
 new_post_name: :title.md
 default_layout: post
@@ -129,9 +125,9 @@ theme_config:
   # ====================== Scheme Settings ====================== #
   # ============================================================= #
 
-  #scheme: Muse
-  #scheme: Mist
-  #scheme: Pisces
+  # scheme: Muse
+  # scheme: Mist
+  # scheme: Pisces
   scheme: Gemini
 
 
@@ -218,7 +214,7 @@ theme_config:
     url: /images/apple-touch-icon-next.png
     rounded: true
     opacity: 1
-    rotated: false
+    rotated: true
 
   social:
     GitHub: https://github.com/theme-next || github
@@ -235,7 +231,7 @@ theme_config:
     icons_only: true
     transition: true
 
-  github_banner: https://github.com/theme-next/hexo-theme-next || Fork NexT on GitHub
+  github_banner: https://github.com/xinpuchen || Fork xinpu on GitHub
 
   toc:
     enable: true
