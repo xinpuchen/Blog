@@ -2,9 +2,9 @@
 ###################### Hexo Configuration #######################
 #################################################################
 
-title: Xinpu's Blog
-description: "HTML CSS JavaScript NodeJS Python PHP"
-author: xinpu
+title: Xinpu Chen's Blog
+description: You never know what you can do till you try.
+author: Xinpu Chen
 language: en
 timezone: UTC
 
@@ -86,7 +86,7 @@ kramed:
   smartypants: false
 
 search:
-  path: search.xml
+  path: search.html
   field: post
 
 symbols_count_time:
@@ -136,12 +136,12 @@ theme_config:
   # ============================================================= #
 
   footer:
-    since: 2014
+    since: 2018
     icon:
       name: heart
       animated: true
       color: "#808080"
-    copyright: NexT
+    copyright: Xinpu Chen
     # -------------------------------------------------------------
     powered:
       enable: true
@@ -149,7 +149,7 @@ theme_config:
     theme:
       enable: false
       version: false
-    custom_text: Theme source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvaGV4by10aGVtZS1uZXh0">here</span><br>Website source code <span class="exturl theme-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RoZW1lLW5leHQvdGhlbWUtbmV4dC5vcmc=">here</span>
+    custom_text: If it helps you, please give me a thumb.
 
   creative_commons:
     license: by-nc-sa
@@ -217,21 +217,15 @@ theme_config:
     rotated: true
 
   social:
-    GitHub: https://github.com/theme-next || github
-    E-Mail: mailto:support@theme-next.org || envelope
-
-    Gitter: https://gitter.im/theme-next || github-alt
-    Riot: https://riot.im/app/#/room/#NexT:matrix.org || bullhorn
-
-    Telegram [Chat]: https://t.me/joinchat/GUNHXA-vZkgSMuimL1VmMw || telegram
-    Telegram [News]: https://t.me/theme_next || telegram
+    GitHub: https://github.com/xinpuchen || github
+    E-Mail: mailto:xinpuchen@foxmail.com || envelope
 
   social_icons:
     enable: true
     icons_only: true
     transition: true
 
-  github_banner: https://github.com/xinpuchen || Fork xinpu on GitHub
+  github_banner: https://github.com/xinpuchen || Fork XinpuChen on GitHub
 
   toc:
     enable: true
@@ -257,7 +251,7 @@ theme_config:
 
   post_edit:
     enable: true
-    url: https://github.com/theme-next/theme-next.org/edit/source/source/
+    url: https://github.com/xinpuchen/blog/tree/master/source
 
 
   # ============================================================= #
@@ -292,7 +286,7 @@ theme_config:
   # ============================================================= #
 
   local_search:
-    enable: false
+    enable: true
     trigger: auto
     top_n_per_article: 1
 

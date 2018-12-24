@@ -1,7 +1,7 @@
 ---
-title: Welcome to the NexT Organization!
-date: 2018-01-01 12:55:56
-link: https://github.com/theme-next
+title: Welcome to my blog!
+date: 2018-12-25 00:20:24
+link: https://github.com/xinpuchen/blog
 ---
 «[NexT][docs]» is a high quality elegant theme for [Hexo][]. It is crafted from scratch, with love.
 
