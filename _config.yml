@@ -85,9 +85,9 @@ kramed:
   # For preserve original quotes in code blocks.
   smartypants: false
 
-search:
-  path: search.html
-  field: post
+# search:
+#   path: search.html
+#   field: post
 
 symbols_count_time:
   symbols: false
@@ -111,7 +111,6 @@ theme_config:
   custom_file_path:
     styles: source/_data/styles.styl
 
-
   # ============================================================= #
   # ======================= SEO Settings ======================== #
   # ============================================================= #
@@ -127,8 +126,8 @@ theme_config:
 
   # scheme: Muse
   # scheme: Mist
-  # scheme: Pisces
-  scheme: Gemini
+  scheme: Pisces
+  # scheme: Gemini
 
 
   # ============================================================= #
@@ -251,7 +250,7 @@ theme_config:
 
   post_edit:
     enable: true
-    url: https://github.com/xinpuchen/blog/tree/master/source
+    url: https://github.com/xinpuchen/blog/tree/master/source/
 
 
   # ============================================================= #
@@ -271,7 +270,7 @@ theme_config:
 
   disqus:
     enable: true
-    shortname: comments
+    shortname: xinpuchen
     count: true
     lazyload: true
 
