@@ -9,7 +9,7 @@
 title: Xinpu Chen's Blog
 subtitle: Welcome to my blog!
 description: You never know what you can do till you try.
-keywords: Web Front End
+keywords: xinpu,xinpuchen,xinpu chen,javascript,node,jquery,git,python,php,sql,linux,教程,软件,编程,开发,运维,云计算,网络,互联网,物联网
 author: Xinpu Chen
 language: en
 timezone: UTC
@@ -62,7 +62,7 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-  
+
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -90,18 +90,51 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/xinpuchen/xinpuchen.github.io.git
-  message: "Updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 
+
+#################################################################
+###################### Plugins Configuration ####################
+#################################################################
+
+# RSS
+# You can use https://github.com/hexojs/hexo-generator-feed to generate these
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+
+# Markdown renderer for Hexo
+# You can reference resources # https://github.com/hexojs/hexo-renderer-marked
 marked:
-  # For preserve original quotes in code blocks.
-  smartypants: false
-  # For disable links in code blocks.
-  autolink: false
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: true
+  smartLists: true
+  smartypants: true
+  modifyAnchors: ''
+  autolink: true
 
-kramed:
-  # For preserve original quotes in code blocks.
-  smartypants: false
+Plugins:
+- hexo-generator-baidu-sitemap
+- hexo-generator-sitemap
 
+baidusitemap:
+    path: baidusitemap.xml
+sitemap:
+    path: sitemap.xml
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
 #################################################################
 ################Theme Core Configuration Settings################
@@ -198,7 +231,7 @@ theme_config:
     beian:
       enable: false
       icp:
-    custom_text: If it helps you, please give me a thumb.
+    # custom_text: If it helps you, please give me a thumb.
 
     # -------------------------------------------------------------
     # Any custom text can be defined here.
@@ -510,7 +543,7 @@ theme_config:
     top_n_per_article: 1
     # unescape html strings to the readable one
     unescape: true
-    
+
   # ---------------------------------------------------------------
   # Tags Settings
   # ---------------------------------------------------------------
@@ -539,3 +572,14 @@ theme_config:
       tabs: true
       labels: true
     border_radius: 0
+
+  # Progress bar in the top during page loading.
+  # Dependencies: https://github.com/theme-next/theme-next-pace
+  pace: true
+  # Themes list:
+  # pace-theme-big-counter | pace-theme-bounce | pace-theme-barber-shop | pace-theme-center-atom
+  # pace-theme-center-circle | pace-theme-center-radar | pace-theme-center-simple | pace-theme-corner-indicator
+  # pace-theme-fill-left | pace-theme-flash | pace-theme-loading-bar | pace-theme-mac-osx | pace-theme-minimal
+  # For example
+  # pace_theme: pace-theme-center-simple pace-theme-flash pace-theme-center-atom
+  pace_theme: pace-theme-minimal
