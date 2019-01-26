@@ -1,5 +1,5 @@
 {
-  "name": "blog",
+  "name": "Blog",
   "version": "0.0.1",
   "private": true,
   "hexo": {
@@ -36,8 +36,8 @@
   "author": "xinpu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xinpuchen/blog/issues"
+    "url": "https://github.com/xinpuchen/Blog/issues"
   },
-  "homepage": "https://github.com/xinpuchen/blog#readme",
+  "homepage": "https://github.com/xinpuchen/Blog#readme",
   "description": ""
 }
