@@ -9,6 +9,7 @@ Experienced in Web Front End, JavaScript and NodeJS, familiar with Python and PH
 
 ### Contact
 
+> [Resume](https://xinpuchen.github.io/resume)
 > [GitHub](https://github.com/xinpuchen) 
 > [Mail](xinpuchen@foxmail.com)
 
