@@ -26,7 +26,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "hexo clean && hexo g && hexo server",
-    "deploy": "hexo g -d",
+    "deploy": "hexo clean && hexo g -d",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

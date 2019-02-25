@@ -10,7 +10,7 @@ title: Xinpu Chen's Blog
 subtitle: Welcome to my blog!
 description: You never know what you can do till you try.
 keywords: xinpu,xinpuchen,xinpu chen,javascript,node,jquery,git,python,php,sql,linux,教程,软件,编程,开发,运维,云计算,网络,互联网,物联网
-author: Xinpu Chen
+author: Xinpu
 language: en
 timezone: UTC
 
@@ -212,7 +212,7 @@ theme_config:
       color: "#808080"
 
     # If not defined, will be used `author` from Hexo main config.
-    copyright: Xinpu Chen
+    copyright: Xinpu
     # -------------------------------------------------------------
     powered:
       # Hexo link (Powered by Hexo).
