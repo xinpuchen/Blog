@@ -15,6 +15,24 @@ JavaScript 的单线程，与它的用途有关。作为浏览器脚本语言，
 
 所以，为了避免复杂性，从一诞生，JavaScript 就是单线程，这已经成了这门语言的核心特征，将来也不会改变。
 
+![](/images/event-loop-1.png)
+
+**浏览器事件环中 js 分为两部分，一个叫 heap（堆），一个叫 stack（栈）。**
+
+对象放在 heap（堆）里，常见的基础类型和函数放在 stack（栈）里，函数执行的时候在栈里执行。栈里函数执行的时候可能会调一些 Dom 操作，ajax 操作和 setTimeout 定时器，这时候要等 stack（栈）里面的所有程序先走（注意：栈里的代码是先进后出），走完后再走 WebAPIs，WebAPIs 执行后的结果放在 callback queue（回调的队列里，注意：队列里的代码先放进去的先执行），也就是当栈里面的程序走完之后，再从任务队列中读取事件，将队列中的事件放到执行栈中依次执行，这个过程是循环不断的。
+
+简单来讲：
+
+1. 所有同步任务都在主线程上执行，形成一个执行栈
+2. 主线程之外，还存在一个任务队列。只要异步任务有了运行结果，就在任务队列之中放置一个事件。
+3. 一旦执行栈中的所有同步任务执行完毕，系统就会读取任务队列,将队列中的事件放到执行栈中依次执行
+4. 主线程从任务队列中读取事件，这个过程是循环不断的
+
+整个的这种运行机制又称为 Event Loop(事件循环)
+
+**栈方法 LIFO（Last In First Out）：先进后出（先进的后出），典型的就是函数调用。**
+**队列方法 FIFO（First In First Out）**
+
 ## 理解任务队列(消息队列)
 
 单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。如果前一个任务耗时很长，后一个任务就不得不一直等着。JavaScript 语言的设计者意识到这个问题，将所有任务分成两种，**一种是同步任务（synchronous），另一种是异步任务（asynchronous）**。同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；异步任务指的是，不进入主线程、而进入"任务队列"（task queue）的任务，只有"任务队列"通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。
@@ -54,7 +72,7 @@ while(true){}
 **主线程从"任务队列"中读取事件，这个过程是循环不断的，所以整个的这种运行机制又称为 Event Loop（事件循环）。只要主线程空了，就会去读取"任务队列"，这就是 JavaScript 的运行机制**。
 这个过程会循环反复。以下这张图可以很好说明这点。
 
-![](/images/event-loop-1.png)
+![](/images/event-loop-2.png)
 
 ## 哪些语句会放入异步任务队列及放入时机
 
@@ -112,7 +130,7 @@ setTimeout(function (){
 console.log("d");
 ```
 
-![](/images/event-loop-2.png)
+![](/images/event-loop-3.png)
 
 > ajax 加载完成时才会放入异步队列，至于这段时间不确定，所有有两种情况：① 大于 100ms,最后的结果是 d c b a ;② 小于 100ms,最后的结果便是 d c a b。
 
@@ -121,7 +139,7 @@ console.log("d");
 我们上面提到异步任务分为宏任务和微任务，宏任务队列可以有多个，微任务队列只有一个。
 
 - 宏任务包括：script(全局任务), setTimeout, setInterval, setImmediate, I/O, UI rendering。
-- 微任务包括: new Promise().then(回调), process.nextTick, Object.observe(已废弃), MutationObserver(html5 新特性)
+- 微任务包括: new Promise().then(回调), process.nextTick, Object.observe(已废弃), MutationObserver(html5 新特性), MessageChannel(消息通道，类似 worker)
 
 **当执行栈中的所有同步任务执行完毕时，是先执行宏任务还是微任务呢？**
 
