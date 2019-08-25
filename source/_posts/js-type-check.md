@@ -10,7 +10,7 @@ tags:
 
 ## JavaScript 有几种类型的值？
 
-avascript 有两种数据类型，分别是基本数据类型和引用数据类型。其中基本数据类型包括 Undefined、Null、Boolean、Number、String、Symbol (ES6 新增，表示独一无二的值)，而引用数据类型统称为 Object 对象，主要包括对象、数组和函数。接下来我们分别看下两者的特点。
+javascript 有两种数据类型，分别是基本数据类型和引用数据类型。其中基本数据类型包括 Undefined、Null、Boolean、Number、String、Symbol (ES6 新增，表示独一无二的值)，而引用数据类型统称为 Object 对象，主要包括对象、数组和函数。接下来我们分别看下两者的特点。
 
 ## 基本数据类型
 
