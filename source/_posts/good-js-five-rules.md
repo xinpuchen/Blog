@@ -14,6 +14,8 @@ tags:
 4. 倾向于遍历对象而不是 Switch 语句
 5. 对 所有/部分 判断使用 Array.every & Array.some
 
+<!-- more -->
+
 ## 多重判断时使用 Array.includes
 
 让我们看一下下面这个例子:

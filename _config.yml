@@ -1,41 +1,21 @@
-#################################################################
-###################### Hexo Configuration #######################
-#################################################################
 # Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Xinpu Chen's Blog
+title: Xinpu's Blog
 subtitle: Welcome to my blog!
 description: You never know what you can do till you try.
-keywords: xinpu,xinpuchen,xinpu chen,javascript,node,jquery,git,python,php,sql,linux,教程,软件,编程,开发,运维,云计算,网络,互联网,物联网
+keywords: xinpu,xinpuchen,JavaScript,Node,React,git,Python,PHP,SQL,Linux,前端,网络,互联网,云计算,Iot,AI,Docker,K8S
 author: Xinpu
 language: en
-timezone: UTC
+timezone: Asia/Shanghai
 
-index_generator:
-  per_page: 5
-  order_by: -date
-
-archive_generator:
-  per_page: 10
-  yearly: true
-  monthly: true
-  daily: false
-
-category_generator:
-  per_page: 20
-
-tag_generator:
-   per_page: 10
-   enable_index_page: false
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://xinpuchen.github.io
 root: /
 permalink: :title/
-permalink_defaults:
 
 # Directory
 source_dir: source
@@ -50,8 +30,12 @@ skip_render:
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
-titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+auto_spacing: true
+titlecase: true # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site
+  exclude: []
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -59,14 +43,18 @@ relative_link: false
 future: true
 highlight:
   enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace:
+  line_number: false
+  auto_detect: true
+  tab_replace: ""
 
 # Category & Tag
 default_category: uncategorized
 category_map:
 tag_map:
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -74,6 +62,8 @@ tag_map:
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
+## Use post's date for updated date unless set in front-matter
+use_date_for_updated: false
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -83,552 +73,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: even
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repo: https://github.com/xinpuchen/xinpuchen.github.io.git
-
-
-#################################################################
-###################### Plugins Configuration ####################
-#################################################################
-
-# RSS
-# You can use https://github.com/hexojs/hexo-generator-feed to generate these
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-  content_limit: 140
-  content_limit_delim: ' '
-  order_by: -date
-
-# Markdown renderer for Hexo
-# You can reference resources # https://github.com/hexojs/hexo-renderer-marked
-marked:
-  gfm: true
-  pedantic: false
-  sanitize: false
-  tables: true
-  breaks: true
-  smartLists: true
-  smartypants: true
-  modifyAnchors: ''
-  autolink: true
-
-Plugins:
-- hexo-generator-baidu-sitemap
-- hexo-generator-sitemap
-
-baidusitemap:
-    path: baidusitemap.xml
-sitemap:
-    path: sitemap.xml
-
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
-
-#################################################################
-################Theme Core Configuration Settings################
-#################################################################
-
-theme_config:
-  # If false, merge configs from `_data/next.yml` into default configuration (rewrite).
-  # If true, will fully override default configuration by options from `_data/next.yml` (override). Only for NexT settings.
-  # And if true, all config from default NexT `_config.yml` must be copied into `next.yml`. Use if you know what you are doing.
-  # Useful if you want to comment some options from NexT `_config.yml` by `next.yml` without editing default config.
-  override: false
-
-  # Allow to cache content generation. Introduced in NexT v6.0.0.
-  cache:
-    enable: true
-
-  # Redefine custom file paths. Introduced in NexT v6.0.2.
-  # If commented, will be used default custom file paths.
-
-  # For example, you want to put your custom styles file
-  # outside theme directory in root `source/_data`, set
-  # `styles: source/_data/styles.styl`
-  custom_file_path:
-    # Default paths: layout/_custom/*
-    #head: source/_data/head.swig
-    #header: source/_data/header.swig
-    #sidebar: source/_data/sidebar.swig
-
-    # Default path: source/css/_variables/custom.styl
-    #variables: source/_data/variables.styl
-    # Default path: source/css/_mixins/custom.styl
-    #mixins: source/_data/mixins.styl
-    # Default path: source/css/_custom/custom.styl
-    styles: source/_data/styles.styl
-
-
-  # ---------------------------------------------------------------
-  # Site Information Settings
-  # ---------------------------------------------------------------
-
-  # To get or check favicons visit: https://realfavicongenerator.net
-  # Put your favicons into `hexo-site/source/` (recommend) or `hexo-site/themes/next/source/images/` directory.
-
-  # Default NexT favicons placed in `hexo-site/themes/next/source/images/` directory.
-  # And if you want to place your icons in `hexo-site/source/` root directory, you must remove `/images` prefix from pathes.
-
-  # For example, you put your favicons into `hexo-site/source/images` directory.
-  # Then need to rename & redefine they on any other names, otherwise icons from Next will rewrite your custom icons in Hexo.
-  favicon:
-    small: /images/favicon.ico
-    # medium: /images/favicon-32x32-next.png
-    # apple_touch_icon: /images/apple-touch-icon-next.png
-    # safari_pinned_tab: /images/logo.svg
-    #android_manifest: /images/manifest.json
-    #ms_browserconfig: /images/browserconfig.xml
-
-  # Set rss to false to disable feed link.
-  # Leave rss as empty to use site's feed link, and install hexo-generator-feed: `npm install hexo-generator-feed --save`.
-  # Set rss to specific value if you have burned your feed already.
-  # rss:
-
-  footer:
-    # Specify the date when the site was setup.
-    # If not defined, current year will be used.
-    since: 2018
-
-    # Icon between year and copyright info.
-    icon:
-      # Icon name in fontawesome, see: https://fontawesome.com/v4.7.0/icons
-      # `heart` is recommended with animation in red (#ff0000).
-      name: heart
-      # If you want to animate the icon, set it to true.
-      animated: true
-      # Change the color of icon, using Hex Code.
-      color: "#808080"
-
-    # If not defined, will be used `author` from Hexo main config.
-    copyright: Xinpu
-    # -------------------------------------------------------------
-    powered:
-      # Hexo link (Powered by Hexo).
-      enable: true
-      # Version info of Hexo after Hexo link (vX.X.X).
-      version: false
-
-    theme:
-      # Theme & scheme info link (Theme - NexT.scheme).
-      enable: true
-      # Version info of NexT after scheme info (vX.X.X).
-      version: false
-    # -------------------------------------------------------------
-    # Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
-    # http://www.miitbeian.gov.cn
-    beian:
-      enable: false
-      icp:
-    # custom_text: If it helps you, please give me a thumb.
-
-    # -------------------------------------------------------------
-    # Any custom text can be defined here.
-    #custom_text: Hosted by <a href="https://pages.coding.me" class="theme-link" rel="noopener" target="_blank">Coding Pages</a>
-
-  # Creative Commons 4.0 International License.
-  # https://creativecommons.org/share-your-work/licensing-types-examples
-  # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-  creative_commons:
-    license: by-nc-sa
-    sidebar: true
-    post: true
-
-
-  # ---------------------------------------------------------------
-  # SEO Settings
-  # ---------------------------------------------------------------
-
-  # Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
-  # See: https://support.google.com/webmasters/answer/139066
-  # Tips: Before you open this tag, remember set up your URL in hexo _config.yml ( ex. url: http://yourdomain.com )
-  canonical: false
-
-  # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-  seo: true
-
-  # If true, will add site-subtitle to index page, added in main hexo config.
-  # subtitle: Subtitle
-  index_with_subtitle: true
-
-  # Automatically add external URL with BASE64 encrypt & decrypt.
-  exturl: true
-
-
-  # ---------------------------------------------------------------
-  # Menu Settings
-  # ---------------------------------------------------------------
-
-  # When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
-  # Usage: `Key: /link/ || icon`
-  # Key is the name of menu item. If translate for this menu will find in languages - this translate will be loaded; if not - Key name will be used. Key is case-senstive.
-  # Value before `||` delimeter is the target link.
-  # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
-  # External url should start with http:// or https:// .
-  menu:
-    home: / || home
-    archives: /archives/ || archive
-    categories: /categories/ || th
-    tags: /tags/ || tags
-    about: /about/ || user
-    # schedule: /schedule/ || calendar
-    # sitemap: /sitemap.xml || sitemap
-    # commonweal: /404/ || heartbeat
-
-  # Enable/Disable menu icons / item badges.
-  menu_settings:
-    icons: true
-    badges: false
-
-  # ---------------------------------------------------------------
-  # Scheme Settings
-  # ---------------------------------------------------------------
-
-  # Schemes
-  #scheme: Muse
-  #scheme: Mist
-  scheme: Pisces
-  #scheme: Gemini
-
-
-  # ---------------------------------------------------------------
-  # Sidebar Settings
-  # ---------------------------------------------------------------
-
-  # Posts / Categories / Tags in sidebar.
-  site_state: true
-
-  # Social Links.
-  # Usage: `Key: permalink || icon`
-  # Key is the link label showing to end users.
-  # Value before `||` delimeter is the target permalink.
-  # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
-  social:
-    GitHub: https://github.com/xinpuchen || github
-    E-Mail: mailto:xinpuchen@foxmail.com || envelope
-    #Weibo: https://weibo.com/yourname || weibo
-    #Google: https://plus.google.com/yourname || google
-    #Twitter: https://twitter.com/yourname || twitter
-    #FB Page: https://www.facebook.com/yourname || facebook
-    #VK Group: https://vk.com/yourname || vk
-    #StackOverflow: https://stackoverflow.com/yourname || stack-overflow
-    #YouTube: https://youtube.com/yourname || youtube
-    #Instagram: https://instagram.com/yourname || instagram
-    #Skype: skype:yourname?call|chat || skype
-
-  social_icons:
-    enable: true
-    icons_only: false
-    transition: true
-
-  # Follow me on GitHub banner in right-top corner.
-  # Usage: `permalink || title`
-  # Value before `||` delimeter is the target permalink.
-  # Value after `||` delimeter is the title and aria-label name.
-  #github_banner: https://github.com/yourname || Follow me on GitHub
-
-  # Blog rolls
-  links_icon: link
-  links_title: Links
-  #links_layout: block
-  links_layout: inline
-  links:
-    Segmentfault: https://segmentfault.com/u/xinpu
-    FrontNote: https://github.com/xinpuchen/FrontNote
-
-  # Sidebar Avatar
-  avatar:
-    # in theme directory(source/images): /images/avatar.gif
-    # in site  directory(source/uploads): /uploads/avatar.gif
-    # You can also use other linking images.
-    url: /images/avatar.png
-    # If true, the avatar would be dispalyed in circle.
-    rounded: true
-    # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.
-    opacity: 1
-    # If true, the avatar would be rotated with the cursor.
-    rotated: true
-
-  # Table Of Contents in the Sidebar
-  toc:
-    enable: true
-    # Automatically add list number to toc.
-    number: true
-    # If true, all words will placed on next lines if header width longer then sidebar width.
-    wrap: true
-    # Maximum heading depth of generated toc. You can set it in one post through `toc_max_depth` var.
-    max_depth: 6
-
-  sidebar:
-    # Sidebar Position, available value: left | right (only for Pisces | Gemini).
-    position: left
-    #position: right
-
-    # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
-    offset: 12
-    # Back to top in sidebar (only for Pisces | Gemini).
-    b2t: true
-    # Scroll percent label in b2t button.
-    scrollpercent: true
-    # Enable sidebar on narrow view (only for Muse | Mist).
-    onmobile: false
-
-
-  # ---------------------------------------------------------------
-  # Post Settings
-  # ---------------------------------------------------------------
-
-  # Automatically scroll page to section which is under <!-- more --> mark.
-  scroll_to_more: true
-
-  # Automatically saving scroll position on each post/page in cookies.
-  save_scroll: true
-
-  # Automatically excerpt description in homepage as preamble text.
-  excerpt_description: true
-
-  # Automatically Excerpt. Not recommend.
-  # Please use <!-- more --> in the post to control excerpt accurately.
-  auto_excerpt:
-    enable: true
-    length: 150
-
-  # Read more button
-  # If true, the read more button would be displayed in excerpt section.
-  read_more_btn: true
-
-  # Post meta display settings
-  post_meta:
-    item_text: true
-    created_at: true
-    updated_at:
-      enabled: true
-      # If true, show updated date label only if `updated date` different from `created date` (post edited in another day than was created).
-      # And if post will edited in same day as created, edited time will show in popup title under created time label.
-      # If false show anyway, but if post edited in same day, show only edited time.
-      another_day: true
-    categories: true
-
-  codeblock:
-    # Manual define the border radius in codeblock
-    # Leave it empty for the default 1
-    border_radius:
-    # Add copy button on codeblock
-    copy_button:
-      enable: true
-      # Show text copy result
-      show_result: true
-
-  # Related popular posts
-  # Dependencies: https://github.com/tea3/hexo-related-popular-posts
-  related_posts:
-    enable: true
-    title: # custom header, leave empty to use the default one
-    display_in_home: false
-    params:
-      maxCount: 5
-      #PPMixingRate: 0.0
-      #isDate: false
-      #isImage: false
-      #isExcerpt: false
-
-  # Post edit
-  # Dependencies: https://github.com/hexojs/hexo-deployer-git
-  post_edit:
-    enable: false
-    url: https://github.com/xinpuchen/blog/tree/master/source/ # Link for view source.
-    #url: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name # Link for fork & edit.
-
-
-  # ---------------------------------------------------------------
-  # Misc Theme Settings
-  # ---------------------------------------------------------------
-
-  # Disable Baidu tranformation on mobile devices.
-  disable_baidu_tranformation: true
-
-  # Reduce padding / margin indents on devices with narrow width.
-  mobile_layout_economy: true
-
-  # Android Chrome header panel color ($brand-bg / $headband-bg => $black-deep).
-  android_chrome_color: "#222"
-
-  # Custom Logo.
-  # Do not support Scheme Mist currently.
-  # Options:
-  #   enabled: If true, will enable custom logo
-  #   image: Images's url, replace it with specific image
-  custom_logo:
-    enabled: false
-    image:
-
-  # Code Highlight theme
-  # Available values: normal | night | night eighties | night blue | night bright
-  # https://github.com/chriskempson/tomorrow-theme
-  highlight_theme: normal
-
-  # Enable "cheers" for archive page.
-  cheers_enabled: true
-
-  # ---------------------------------------------------------------
-  # Third Party Services Settings
-  # ---------------------------------------------------------------
-
-  # Math Equations Render Support
-  math:
-    enable: true
-
-    # Default(true) will load mathjax/katex script on demand
-    # That is it only render those page who has `mathjax: true` in Front Matter.
-    # If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.
-    per_page: true
-
-    engine: mathjax
-    #engine: katex
-
-    # hexo-rendering-pandoc (or hexo-renderer-kramed) needed to full MathJax support.
-    mathjax:
-      # Use 2.7.1 as default, jsdelivr as default CDN, works everywhere even in China
-      cdn: //cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-      # For newMathJax CDN (cdnjs.cloudflare.com) with fallback to oldMathJax (cdn.mathjax.org).
-      #cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-      # For direct link to MathJax.js with CloudFlare CDN (cdnjs.cloudflare.com).
-      #cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML
-
-    # hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin)
-    # needed to full Katex support.
-    katex:
-      # Use 0.7.1 as default, jsdelivr as default CDN, works everywhere even in China
-      cdn: //cdn.jsdelivr.net/npm/katex@0.7.1/dist/katex.min.css
-      # CDNJS, provided by cloudflare, maybe the best CDN, but not works in China
-      #cdn: //cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css
-
-    # Default(true) will load PDFObject/PDF.js script on demand
-    # That is it only render those page who has `pdf: true` in Front Matter.
-    # If you set it to false, it will load PDFObject/PDF.js srcipt EVERY PAGE.
-    # per_page: true
-
-  # Disqus
-  disqus:
-    enable: true
-    shortname: xinpuchen
-    count: true
-    lazyload: true
-
-  # Yandex Webmaster tools verification setting
-  # See: https://webmaster.yandex.ru
-  yandex_site_verification: 3ac9ae36ddebb425
-
-  # Search Services
-
-  # Local search
-  # Dependencies: https://github.com/theme-next/hexo-generator-searchdb
-  local_search:
-    enable: true
-    # if auto, trigger search by changing input
-    # if manual, trigger search by pressing enter key or search button
-    trigger: auto
-    # show top n results per article, show all results by setting to -1
-    top_n_per_article: 1
-    # unescape html strings to the readable one
-    unescape: true
-
-  # ---------------------------------------------------------------
-  # Tags Settings
-  # ---------------------------------------------------------------
-
-  # Note tag (bs-callout).
-  note:
-    # Note tag style values:
-    #  - simple    bs-callout old alert style. Default.
-    #  - modern    bs-callout new (v2-v3) alert style.
-    #  - flat      flat callout style with background, like on Mozilla or StackOverflow.
-    #  - disabled  disable all CSS styles import of note tag.
-    style: simple
-    icons: true
-    border_radius: 0
-    # Offset lighter of background in % for modern and flat styles (modern: -12 | 12; flat: -18 | 6).
-    # Offset also applied to label tag variables. This option can work with disabled note tag.
-    light_bg_offset: 0
-
-  # Label tag.
-  label: true
-
-  # Tabs tag.
-  tabs:
-    enable: true
-    transition:
-      tabs: true
-      labels: true
-    border_radius: 0
-
-  # Reading progress bar
-  # Dependencies: https://github.com/theme-next/theme-next-reading-progress
-  reading_progress:
-    enable: false
-    color: "#00b38a"
-    height: 2px
-
-  # Fancybox. There is support for old version 2 and new version 3.
-  # Please, choose only any one variant, do not need to install both.
-  # For install 2.x: https://github.com/theme-next/theme-next-fancybox
-  # For install 3.x: https://github.com/theme-next/theme-next-fancybox3
-  fancybox: true
-
-  # Progress bar in the top during page loading.
-  # Dependencies: https://github.com/theme-next/theme-next-pace
-  pace: true
-  # Themes list:
-  # pace-theme-big-counter | pace-theme-bounce | pace-theme-barber-shop | pace-theme-center-atom
-  # pace-theme-center-circle | pace-theme-center-radar | pace-theme-center-simple | pace-theme-corner-indicator
-  # pace-theme-fill-left | pace-theme-flash | pace-theme-loading-bar | pace-theme-mac-osx | pace-theme-minimal
-  # For example
-  # pace_theme: pace-theme-center-simple pace-theme-flash pace-theme-center-atom
-  pace_theme: pace-theme-minimal
-
-  vendors:
-    # Internal path prefix. Please do not edit it.
-    _internal: lib
-
-    # jquery: //cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js
-    fancybox: //cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js
-    fancybox_css: //cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css
-    # fastclick: //cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js
-    # lazyload: //cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js
-    # velocity: //cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js
-    # velocity_ui: //cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js
-    # ua_parser: //cdn.jsdelivr.net/npm/ua-parser-js@0/src/ua-parser.min.js
-    # fontawesome: //cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css
-    # algolia_instant_js: //cdn.jsdelivr.net/npm/instantsearch.js@2/dist/instantsearch.js
-    # algolia_instant_css: //cdn.jsdelivr.net/npm/instantsearch.js@2/dist/instantsearch.min.css
-    # pace: //cdn.jsdelivr.net/npm/pace-js@1/pace.min.js
-    # pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
-    # canvas_nest: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js
-    # canvas_nest_nomobile: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest-nomobile.min.js
-    # three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js
-    # three_waves: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js
-    # canvas_lines: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js
-    # canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js
-    # canvas_ribbon: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js
-    # han: //cdn.jsdelivr.net/npm/han-css@3/dist/han.min.css
-    # pangu: //cdn.jsdelivr.net/npm/pangu@3/dist/browser/pangu.min.js
-    # needmoreshare2_js: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js
-    # needmoreshare2_css: //cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css
-    # bookmark: //cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js
-    # reading_progress: //cdn.jsdelivr.net/gh/theme-next/theme-next-reading-progress@1.1/reading_progress.min.js
-    # leancloud: //cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js
-    # valine: //cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js
-    # gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js
-    # gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css
-    # md5: //cdn.jsdelivr.net/npm/js-md5@0/src/md5.min.js

@@ -15,6 +15,8 @@ tags:
 - [`useEffect()`](https://reactjs.org/docs/hooks-reference.html#useeffect) 用于声明一个补充规则(side effect)。
 - [`useContext()`](https://reactjs.org/docs/hooks-reference.html#usecontext) 用于读取一些上下文的内容。
 
+<!-- more -->
+
 但是仍有一些其他的 API，例如`React.memo()`和`<Context.Provider>`，它们*不是*Hooks。通常提出的 Hook 版本会建议是*noncompositional*或者*antimodular*。本文将帮助你了解原因。
 
 **提示：这篇文章对那些对 API 讨论感兴趣的人来说是一个深刻的话题，你不需要考虑使用 React 来提升效率！**

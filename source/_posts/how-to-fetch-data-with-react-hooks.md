@@ -8,6 +8,8 @@ tags:
 
 在本教程中，我想向您展示如何使用 [状态](https://reactjs.org/docs/hooks-state.html)和[效果](https://reactjs.org/docs/hooks-effect.html)挂钩在 React with Hooks 中获取数据。我们将使用广为人知的[黑客新闻 API](https://hn.algolia.com/api)来获取科技界的热门文章。您还将实现数据提取的自定义挂钩，可以在应用程序的任何位置重用，也可以作为独立节点包在 npm 上发布。
 
+<!-- more -->
+
 如果您对这个新的 React 功能一无所知，请查看[React Hooks](https://www.robinwieruch.de/react-hooks/)的这个[介绍](https://www.robinwieruch.de/react-hooks/)。如果您想要查看完成的项目以获取展示如何在 React with Hooks 中获取数据的展示示例，请检查此[GitHub 存储库](https://github.com/the-road-to-learn-react/react-hooks-introduction)。
 
 **注意：**将来，React Hooks 不适用于 React 中的数据提取。相反，一个名为 Suspense 的功能将负责它。以下演练是了解 React 中有关状态和效果挂钩的更多信息的好方法。
@@ -17,7 +19,7 @@ tags:
 如果您不熟悉 React 中的数据提取，请查看我在[React 文章中提取的大量数据](https://www.robinwieruch.de/react-fetching-data/)。它将引导您完成使用 React 类组件的数据获取，如何使用[Render Prop 组件](https://www.robinwieruch.de/react-render-props-pattern/)和[高阶组件重新获取](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)它，以及它如何处理错误处理和加载微调器。在本文中，我想在功能组件中使用 React Hooks 向您展示所有内容。
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
@@ -41,14 +43,16 @@ App 组件显示了一个项目列表（hits = Hacker News 文章）。状态和
 我们将使用[axios](https://github.com/axios/axios)来获取数据，但是您可以使用另一个数据获取库或浏览器的本机提取 API。如果尚未安装 axios，可以在命令行中执行此操作`npm install axios`。然后为数据获取实现效果钩子：
 
 ```jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
 
   useEffect(async () => {
-    const result = await axios('http://hn.algolia.com/api/v1/search?query=redux');
+    const result = await axios(
+      "http://hn.algolia.com/api/v1/search?query=redux"
+    );
 
     setData(result.data);
   });
@@ -72,14 +76,16 @@ export default App;
 但是，当您运行应用程序时，您应该偶然发现一个讨厌的循环。效果挂钩在组件安装时运行，但也在组件更新时运行。因为我们在每次数据提取后设置状态，所以组件会更新并且效果会再次运行。它一次又一次地获取数据。这是一个错误，需要避免。**我们只想在组件安装时获取数据**。这就是为什么你可以提供一个空数组作为效果钩子的第二个参数，以避免在组件更新时激活它，但仅用于组件的安装。
 
 ```jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
 
   useEffect(async () => {
-    const result = await axios('http://hn.algolia.com/api/v1/search?query=redux');
+    const result = await axios(
+      "http://hn.algolia.com/api/v1/search?query=redux"
+    );
 
     setData(result.data);
   }, []);
@@ -103,15 +109,17 @@ export default App;
 还有最后一个问题。在代码中，我们使用 async / await 从第三方 API 获取数据。根据文档，每个使用 async 注释的函数都会返回一个隐式的 promise：“async 函数声明定义了一个异步函数，它返回一个 AsyncFunction 对象。异步函数是一个通过事件循环异步操作的函数，使用隐式 Promise 返回其结果。“。但是，效果挂钩应该不返回任何内容或清除功能。这就是为什么你可能会在开发者控制台日志中看到以下警告：**07：41：22.910 index.js：1452 警告：useEffect 函数必须返回一个清理函数或什么也不返回。不支持 Promises 和 useEffect（async（）=> ...），但可以在效果中调用异步函数**。。这就是为什么`useEffect`不允许在函数中直接使用 async 的原因。让我们通过在效果中使用 async 函数来实现它的解决方法。
 
 ```jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://hn.algolia.com/api/v1/search?query=redux');
+      const result = await axios(
+        "http://hn.algolia.com/api/v1/search?query=redux"
+      );
 
       setData(result.data);
     };
@@ -140,16 +148,18 @@ export default App;
 太好了，我们在组件安装后获取数据。但是如何使用输入字段告诉 API 我们感兴趣的主题？“Redux”被视为默认查询。但是关于“React”的话题呢？让我们实现一个输入元素，使某人能够获取除“Redux”故事之外的其他故事。因此，为 input 元素引入一个新状态。
 
 ```jsx
-import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
+  const [query, setQuery] = useState("redux");
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://hn.algolia.com/api/v1/search?query=redux');
+      const result = await axios(
+        "http://hn.algolia.com/api/v1/search?query=redux"
+      );
 
       setData(result.data);
     };
@@ -159,7 +169,11 @@ function App() {
 
   return (
     <Fragment>
-      <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
+      <input
+        type="text"
+        value={query}
+        onChange={event => setQuery(event.target.value)}
+      />
       <ul>
         {data.hits.map(item => (
           <li key={item.objectID}>
@@ -233,12 +247,14 @@ export default App;
 ```jsx
 function App() {
   const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
-  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState("redux");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(`http://hn.algolia.com/api/v1/search?query=${query}`);
+      const result = await axios(
+        `http://hn.algolia.com/api/v1/search?query=${query}`
+      );
 
       setData(result.data);
     };
@@ -248,7 +264,11 @@ function App() {
 
   return (
     <Fragment>
-      <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
+      <input
+        type="text"
+        value={query}
+        onChange={event => setQuery(event.target.value)}
+      />
       <button type="button" onClick={() => setSearch(query)}>
         Search
       </button>
@@ -298,8 +318,10 @@ export default App;
 ```jsx
 function App() {
   const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
-  const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=redux');
+  const [query, setQuery] = useState("redux");
+  const [url, setUrl] = useState(
+    "http://hn.algolia.com/api/v1/search?query=redux"
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -313,8 +335,17 @@ function App() {
 
   return (
     <Fragment>
-      <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
-      <button type="button" onClick={() => setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)}>
+      <input
+        type="text"
+        value={query}
+        onChange={event => setQuery(event.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() =>
+          setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)
+        }
+      >
         Search
       </button>
 
@@ -337,13 +368,15 @@ function App() {
 让我们为数据提取引入一个加载指示器。它只是另一个由状态钩子管理的状态。加载标志用于在 App 组件中呈现加载指示符。
 
 ```jsx
-import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
-  const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=redux');
+  const [query, setQuery] = useState("redux");
+  const [url, setUrl] = useState(
+    "http://hn.algolia.com/api/v1/search?query=redux"
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -361,8 +394,17 @@ function App() {
 
   return (
     <Fragment>
-      <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
-      <button type="button" onClick={() => setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)}>
+      <input
+        type="text"
+        value={query}
+        onChange={event => setQuery(event.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() =>
+          setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)
+        }
+      >
         Search
       </button>
 
@@ -391,13 +433,15 @@ export default App;
 使用 React 钩子获取数据的错误处理怎么样？错误只是用状态挂钩初始化的另一个状态。一旦出现错误状态，App 组件就可以为用户呈现反馈。使用 async / await 时，通常使用 try / catch 块进行错误处理。你可以在效果范围内完成：
 
 ```jsx
-import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
   const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
-  const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=redux');
+  const [query, setQuery] = useState("redux");
+  const [url, setUrl] = useState(
+    "http://hn.algolia.com/api/v1/search?query=redux"
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -422,8 +466,17 @@ function App() {
 
   return (
     <Fragment>
-      <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
-      <button type="button" onClick={() => setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)}>
+      <input
+        type="text"
+        value={query}
+        onChange={event => setQuery(event.target.value)}
+      />
+      <button
+        type="button"
+        onClick={() =>
+          setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)
+        }
+      >
         Search
       </button>
 
@@ -522,7 +575,9 @@ function App() {
 ```jsx
 const useHackerNewsApi = () => {
   const [data, setData] = useState({ hits: [] });
-  const [url, setUrl] = useState('http://hn.algolia.com/api/v1/search?query=redux');
+  const [url, setUrl] = useState(
+    "http://hn.algolia.com/api/v1/search?query=redux"
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -557,7 +612,7 @@ const useHackerNewsApi = () => {
 
 ```jsx
 function App() {
-  const [query, setQuery] = useState('redux');
+  const [query, setQuery] = useState("redux");
   const { data, isLoading, isError, doFetch } = useHackerNewsApi();
 
   return <Fragment>...</Fragment>;
@@ -613,8 +668,8 @@ function App() {
 初始状态也可以是通用的。将它简单地传递给新的自定义钩子：
 
 ```jsx
-import React, { Fragment, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 
 const useDataApi = (initialUrl, initialData) => {
   const [data, setData] = useState(initialData);
@@ -649,10 +704,13 @@ const useDataApi = (initialUrl, initialData) => {
 };
 
 function App() {
-  const [query, setQuery] = useState('redux');
-  const { data, isLoading, isError, doFetch } = useDataApi('http://hn.algolia.com/api/v1/search?query=redux', {
-    hits: [],
-  });
+  const [query, setQuery] = useState("redux");
+  const { data, isLoading, isError, doFetch } = useDataApi(
+    "http://hn.algolia.com/api/v1/search?query=redux",
+    {
+      hits: []
+    }
+  );
 
   return (
     <Fragment>
@@ -663,7 +721,11 @@ function App() {
           event.preventDefault();
         }}
       >
-        <input type="text" value={query} onChange={event => setQuery(event.target.value)} />
+        <input
+          type="text"
+          value={query}
+          onChange={event => setQuery(event.target.value)}
+        />
         <button type="submit">Search</button>
       </form>
 
@@ -786,11 +848,11 @@ const useDataApi = (initialUrl, initialData) => {
 ```jsx
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_INIT':
+    case "FETCH_INIT":
       return { ...state };
-    case 'FETCH_SUCCESS':
+    case "FETCH_SUCCESS":
       return { ...state };
-    case 'FETCH_FAILURE':
+    case "FETCH_FAILURE":
       return { ...state };
     default:
       throw new Error();
@@ -803,24 +865,24 @@ reducer 函数可以通过其参数访问当前状态和传入操作。到目前
 ```jsx
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_INIT':
+    case "FETCH_INIT":
       return {
         ...state,
         isLoading: true,
-        isError: false,
+        isError: false
       };
-    case 'FETCH_SUCCESS':
+    case "FETCH_SUCCESS":
       return {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload,
+        data: action.payload
       };
-    case 'FETCH_FAILURE':
+    case "FETCH_FAILURE":
       return {
         ...state,
         isLoading: false,
-        isError: true,
+        isError: true
       };
     default:
       throw new Error();
@@ -843,24 +905,24 @@ const useDataApi = (initialUrl, initialData) => {
   const [state, dispatch] = useReducer(dataFetchReducer, {
     isLoading: false,
     isError: false,
-    data: initialData,
+    data: initialData
   });
 
   useEffect(() => {
     let didCancel = false;
 
     const fetchData = async () => {
-      dispatch({ type: 'FETCH_INIT' });
+      dispatch({ type: "FETCH_INIT" });
 
       try {
         const result = await axios(url);
 
         if (!didCancel) {
-          dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+          dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
       } catch (error) {
         if (!didCancel) {
-          dispatch({ type: 'FETCH_FAILURE' });
+          dispatch({ type: "FETCH_FAILURE" });
         }
       }
     };

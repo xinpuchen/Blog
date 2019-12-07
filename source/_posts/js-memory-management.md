@@ -12,7 +12,11 @@ tags:
 
 ## 什么是内存泄漏？
 
+![](/images/js-memory-management-5.png)
+
 当我们决定不再使用某些内存时，由于错误的编码，未能使得 GC(Gabbage Collection)正确的将这些内存回收的情况，就是内存泄漏。
+
+<!-- more -->
 
 ## 内存的占用
 
@@ -77,9 +81,9 @@ GC Root 是内存的根结节，在浏览器中它是 window，在 NodeJS 中则
   ```
 - 错误使用了全局变量
   ```js
-  a = '1234567';
+  a = "1234567";
   相当于;
-  window.a = '1234567';
+  window.a = "1234567";
   ```
 - DOM 元素清空或删除时，绑定的事件未清除
   ```html
@@ -87,9 +91,9 @@ GC Root 是内存的根结节，在浏览器中它是 window，在 NodeJS 中则
     <input type="button" value="Click me" id="myBtn" />
   </div>
   <script type="text/javascript">
-    var btn = document.getElementById('myBtn');
+    var btn = document.getElementById("myBtn");
     btn.onclick = function() {
-      document.getElementById('myDiv').innerHTML = 'Processing...';
+      document.getElementById("myDiv").innerHTML = "Processing...";
       /* 清除事件绑定 */
       // btn.onclick = null;
     };
@@ -99,7 +103,7 @@ GC Root 是内存的根结节，在浏览器中它是 window，在 NodeJS 中则
 
   ```js
   function bindEvent() {
-    var obj = document.getElementById('xxx');
+    var obj = document.getElementById("xxx");
 
     obj.onclick = function() {
       /** 空函数*/
@@ -113,8 +117,8 @@ GC Root 是内存的根结节，在浏览器中它是 window，在 NodeJS 中则
 - DOM 元素清空或删除时，子元素存在 JS 引用，导致子元素的所有父元素都不会被删除
   ```js
   // b是a的子dom节点, a是body的子节点
-  var aElement = document.getElementById('a');
-  var bElement = document.getElementById('b');
+  var aElement = document.getElementById("a");
+  var bElement = document.getElementById("b");
   document.body.removeChild(aElement);
   // aElement = null；
   // bElement = null;
@@ -135,7 +139,7 @@ GC Root 是内存的根结节，在浏览器中它是 window，在 NodeJS 中则
   var arr = [];
   for (var i = 0; i < 100000000000; i++) {
     var a = {
-      desc: 'an object',
+      desc: "an object"
     };
     arr.push(a);
   }
