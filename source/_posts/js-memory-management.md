@@ -14,7 +14,7 @@ tags:
 
 ![](/images/js-memory-management-5.png)
 
-当我们决定不再使用某些内存时，由于错误的编码，未能使得 GC(Gabbage Collection)正确的将这些内存回收的情况，就是内存泄漏。
+当我们决定不再使用某些内存时，由于错误的编码，未能使得 GC(Garbage Collection)正确的将这些内存回收的情况，就是内存泄漏。
 
 <!-- more -->
 

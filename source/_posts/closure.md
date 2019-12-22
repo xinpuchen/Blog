@@ -44,7 +44,7 @@ function fn() {
 }
 ```
 
-上面代码中，函数 f2 就在函数 f1 内部，这时 f1 内部的所有局部变量，对 f2 都是可见的。既然 f2 可以读取 f1 的局部变量，那么只要把 f2 作为返回值，我们不就可以在 f1 外部读取它的内部变量了吗！
+上面代码中，函数 f 就在函数 fn 内部，这时 fn 内部的所有局部变量，对 f 都是可见的。既然 f 可以读取 fn 的局部变量，那么只要把 f 作为返回值，我们不就可以在 fn 外部读取它的内部变量了吗！
 
 ## 闭包是什么
 
@@ -58,8 +58,8 @@ function fn() {
   }
   return f; // fn返回了f的引用
 }
-var result = fn(); // result就是f函数了
-result(); // 执行result，全局作用域下没有a的定义，但是函数闭包，能够把定义函数的时候的作用域一起记住，输出999
+var result = fn(); // result就是 f 函数了
+result(); // 执行result，全局作用域下没有 n 的定义，但是函数闭包，能够把定义函数的时候的作用域一起记住，输出999
 ```
 
 上面代码中，函数 fn 的返回值就是函数 f，由于 f 可以读取 fn 的内部变量，所以就可以在外部获得 fn 的内部变量了。
@@ -223,8 +223,8 @@ for (let i = 0; i < btns.length; i++) {
 ```js
 for (var i = 0; i < btns.length; i++) {
   (function(j) {
-    btns[j].onclick = function(i) {
-      console.log("第" + (i + 1) + "个");
+    btns[j].onclick = function() {
+      console.log("第" + (j + 1) + "个");
     };
   })(i);
 }
