@@ -3,14 +3,14 @@ title: About me
 date: 2018-12-26 18:24:01
 ---
 
-### Skill
+### About Xinpu
 
-Experienced in Web Front End, JavaScript and NodeJS, familiar with Python and PHP development.
+Hello! My name is Xinpu. I am a Front-end developer, blogger. I love JavaScript, TypeScript, NodeJS, Python and open source and DevOps and I'm focusing on Cloud-computing direction web development.
 
-### Contact
+### Contact me
 
-[Resume](https://xinpuchen.github.io/resume)
-[GitHub](https://github.com/xinpuchen)
 [Mail](mailto:xinpuchen@foxmail.com)
+[GitHub](https://github.com/xinpuchen)
+[Linkedin](https://www.linkedin.com/in/xinpuchen)
 
-### For The Best Thing In The World!
+### let today = new Beginnings();
