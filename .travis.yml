@@ -1,17 +1,21 @@
 language: node_js
 node_js: stable
+cache:
+  directories:
+    - node_modules
 branches:
   only:
     - master
 before_install:
   - npm i -g hexo-cli
+  - git submodule update --init --recursive
 install:
   - npm i
 script:
   - hexo clean
   - hexo generate
 after_script:
-  - git clone https://${GH_REF} .deploy_git
+  - git clone https://${GITHUB_REF} .deploy_git
   - cd .deploy_git
   - git checkout master
   - cd ../
@@ -20,7 +24,7 @@ after_script:
   - git init
   - git add .
   - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
-  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git push --force --quiet "https://${GITHUB_TOKEN}@${GITHUB_REF}" master:master
 env:
   global:
-    - GH_REF: github.com/xinpuchen/xinpuchen.github.io.git
+    - GITHUB_REF: github.com/xinpuchen/xinpuchen.github.io.git
