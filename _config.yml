@@ -5,10 +5,10 @@
 # Site
 title: Xinpu's Blog
 subtitle: Welcome to my blog!
-description: You never know what you can do till you try.
-keywords: xinpu,xinpuchen,JavaScript,Node,React,git,Python,PHP,SQL,Linux,前端,网络,互联网,云计算,Iot,AI,Docker,K8S
-author: Xinpu
-language: en
+description: xinpu,xinpuchen,陈鑫谱,昕普,昕普同学,front-notes,awesome-coding,JavaScript,Node,React,Git,Python,SQL,Linux,前端,计算机网络,云计算,Iot,AI,Docker,K8S,DevOps,CI/CD.
+keywords: xinpu,xinpuchen,陈鑫谱,昕普,昕普同学,front-notes,awesome-coding,JavaScript,Node,React,Git,Python,SQL,Linux,前端,计算机网络,云计算,Iot,AI,Docker,K8S,DevOps,CI/CD
+author: 昕普同学
+language: zh-cn
 timezone: Asia/Shanghai
 
 # URL
@@ -89,7 +89,7 @@ theme_config:
   favicon: /images/favicon.ico
 
   # Set feed link (false | default | your feed link)
-  # false: disable
+  false: default
   # default: use `atom.xml`, generator for `hexo-generator-feed`
   rss: default
 
@@ -101,13 +101,14 @@ theme_config:
     Archives: /archives/
     Categories: /categories/
     Tags: /tags/
+    算法: /awesome-coding/
     About: /about/
 
   # ===========================================
   # Theme Settings
   # ===========================================
   # color: default | mint green | cobalt blue | hot pink | dark violet
-  color: dark violet
+  color: mint green
 
   # default page mode: default | archives
   mode: default
@@ -135,7 +136,7 @@ theme_config:
   # Social links Settings
   # ===========================================
   social:
-    email: xinpu95@gmail.com
+    email: xinpuchen@foxmail.com
     stack-overflow:
     twitter:
     facebook:
@@ -183,7 +184,7 @@ theme_config:
   # Demo: https://gitalk.github.io
   # https://github.com/gitalk/gitalk
   gitalk:
-    enable: false
+    enable: true
     github_id: GitHub repo owner
     repo: GitHub repo
     client_id: GitHub Application Client ID
@@ -193,7 +194,7 @@ theme_config:
     # Gitalk's display language depends on user's browser or system environment
     # If you want everyone visiting your site to see a uniform language, you can set a force language value
     # Available values: en, es-ES, fr, ru, zh-CN, zh-TW
-    language:
+    language: zh-CN
 
   # ===========================================
   # Version
