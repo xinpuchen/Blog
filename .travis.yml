@@ -7,24 +7,11 @@ branches:
   only:
     - master
 before_install:
-  - npm i -g hexo-cli
+  - npm install -g hexo-cli
   - git submodule update --init --recursive
 install:
-  - npm i
+  - npm install
 script:
-  - hexo clean
-  - hexo generate
-after_script:
-  - git clone https://${GITHUB_REF} .deploy_git
-  - cd .deploy_git
-  - git checkout master
-  - cd ../
-  - mv .deploy_git/.git/ ./public/
-  - cd ./public
-  - git init
-  - git add .
-  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
-  - git push --force --quiet "https://${GITHUB_TOKEN}@${GITHUB_REF}" master:master
-env:
-  global:
-    - GITHUB_REF: github.com/xinpuchen/xinpuchen.github.io.git
+  - npm run clean
+  - npm run build
+  - npm run deploy
